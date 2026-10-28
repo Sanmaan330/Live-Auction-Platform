@@ -13,9 +13,10 @@ const { registerAuctionSocket } = require("./sockets/auctionSocket");
 
 const app = express();
 const server = http.createServer(app);
-const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:3000")
-  .split(",")
-  .map((origin) => origin.trim());
+const allowedOrigins = [...new Set([
+  ...(process.env.CLIENT_ORIGIN || "http://localhost:3000").split(","),
+  "https://live-auction-platform-h7d2.onrender.com",
+].map((origin) => origin.trim()))];
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
