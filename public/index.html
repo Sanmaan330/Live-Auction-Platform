@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101a30">
+    <title>Boundary Bid | Live Cricket Auction</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Boundary Bid home"><span class="brand-mark">BB</span><span>BOUNDARY<span class="brand-accent">BID</span></span></a>
+      <div class="topbar-right">
+        <span id="connection-status" class="connection"><i></i> Offline</span>
+        <span id="user-label" class="user-label"></span>
+        <button id="logout-button" class="button button-quiet hidden" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="login-view" class="login-view">
+        <div class="login-art">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <span class="art-ball">●</span>
+          <p class="eyebrow">THE BIG NIGHT STARTS HERE</p>
+          <h1>Build your<br><span>winning XI.</span></h1>
+          <p class="muted">Every second counts. Every bid changes the game.</p>
+        </div>
+        <form id="login-form" class="login-card">
+          <p class="eyebrow">FRANCHISE ACCESS</p>
+          <h2>Welcome to auction night</h2>
+          <p class="muted">Sign in to enter your live bidding room.</p>
+          <label for="username">Username</label>
+          <input id="username" name="username" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <p id="login-error" class="error-message" role="alert"></p>
+          <button class="button button-primary full-width" type="submit">Enter the auction <span>→</span></button>
+        </form>
+      </section>
+
+      <section id="app-view" class="app-view hidden">
+        <div class="page-heading">
+          <div><p class="eyebrow">SEASON 01 <span class="eyebrow-dot">/</span> LIVE AUCTION</p><h1>Auction <span>floor.</span></h1></div>
+          <div id="admin-actions" class="admin-actions hidden">
+            <button id="add-player-button" class="button button-outline" type="button">+ Add player</button>
+            <button id="start-auction-button" class="button button-primary" type="button">Start next lot <span>→</span></button>
+          </div>
+        </div>
+
+        <section id="auction-room" class="auction-room">
+          <div class="room-topline"><span class="live-pill"><i></i> LIVE LOT</span><span id="lot-number" class="lot-number"></span></div>
+          <div class="room-grid">
+            <article class="player-panel">
+              <div id="player-visual" class="player-visual"><span class="player-initials">?</span><span class="visual-caption">ON THE BLOCK</span></div>
+              <div class="player-information">
+                <p id="player-category" class="eyebrow">PLAYER CATEGORY</p>
+                <h2 id="player-name">Waiting for the next player</h2>
+                <p id="player-meta" class="muted">Choose an active lot to follow the bidding.</p>
+              </div>
+            </article>
+            <article class="bid-panel">
+              <div class="timer-row"><div><p class="eyebrow">TIME REMAINING</p><div id="countdown" class="countdown">--<span>SEC</span></div></div><div id="auction-state" class="state-chip">WAITING</div></div>
+              <div class="price-block"><p class="eyebrow">CURRENT HIGH BID</p><div id="current-price" class="current-price">₹0 <span></span></div><p id="leader-label" class="muted">No leading bid</p></div>
+              <div class="bid-controls">
+                <p class="eyebrow">PLACE YOUR BID <span id="minimum-label" class="minimum-label"></span></p>
+                <div class="bid-input-row"><span>₹</span><input id="bid-amount" type="number" min="1" step="1" inputmode="numeric" placeholder="Enter bid amount" aria-label="Bid amount"></div>
+                <div class="quick-bids"><button type="button" data-increment="5000000">+50L</button><button type="button" data-increment="10000000">+1Cr</button><button type="button" data-increment="50000000">+5Cr</button></div>
+                <button id="bid-button" class="button button-primary full-width bid-button" type="button">Place bid <span>↗</span></button>
+                <p id="bid-feedback" class="feedback" aria-live="polite"></p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <div class="lower-grid">
+          <section class="content-card auction-list-card">
+            <div class="section-heading"><div><p class="eyebrow">AUCTION FLOOR</p><h2>Lots & activity</h2></div><span id="auction-count" class="count-badge">0 LOTS</span></div>
+            <div id="auction-list" class="auction-list"><p class="empty-state">No auction lots yet.</p></div>
+          </section>
+          <section class="content-card">
+            <div class="section-heading"><div><p class="eyebrow">LIVE FEED</p><h2>Bid history</h2></div><span class="feed-dot"></span></div>
+            <div id="bid-history" class="bid-history"><p class="empty-state">Accepted bids appear here in real time.</p></div>
+          </section>
+        </div>
+
+        <section id="team-dashboard" class="team-dashboard">
+          <div class="section-heading"><div><p class="eyebrow">FRANCHISE OVERVIEW</p><h2 id="team-heading">Your dashboard</h2></div><span class="dashboard-caption">YOUR PURSE & SQUAD</span></div>
+          <div class="stat-grid">
+            <article class="stat-card"><p class="eyebrow">AVAILABLE PURSE</p><strong id="remaining-purse">₹—</strong><span>of <span id="total-purse">₹—</span> total</span></article>
+            <article class="stat-card"><p class="eyebrow">SQUAD SIZE</p><strong id="squad-count">0</strong><span>players secured</span></article>
+            <article class="stat-card"><p class="eyebrow">ACTIVE BIDS</p><strong id="active-bid-count">0</strong><span>lots currently leading</span></article>
+            <article class="stat-card"><p class="eyebrow">LOST BIDS</p><strong id="lost-count">0</strong><span>players sold elsewhere</span></article>
+          </div>
+          <div class="squad-columns">
+            <div class="content-card"><div class="section-heading compact"><h3>Your squad</h3></div><div id="squad-list" class="compact-list"><p class="empty-state">No players won yet.</p></div></div>
+            <div class="content-card"><div class="section-heading compact"><h3>Outbid / lost</h3></div><div id="lost-list" class="compact-list"><p class="empty-state">No lost bids yet.</p></div></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="player-dialog" class="modal">
+      <form id="player-form" method="dialog">
+        <div class="section-heading"><div><p class="eyebrow">AUCTION ADMIN</p><h2>Add a player</h2></div><button id="close-player-dialog" class="icon-button" type="button" aria-label="Close">×</button></div>
+        <label for="new-player-name">Player name</label><input id="new-player-name" required>
+        <label for="new-player-category">Category</label><select id="new-player-category"><option>Batsman</option><option>Bowler</option><option>All-Rounder</option><option>Wicketkeeper</option></select>
+        <label for="new-player-price">Base price (₹)</label><input id="new-player-price" type="number" min="1" step="1" required>
+        <label for="new-player-photo">Photo URL (optional)</label><input id="new-player-photo" type="url">
+        <label for="new-player-owner">Listing owner (optional)</label><select id="new-player-owner"><option value="">Auctioneer / neutral listing</option></select>
+        <button class="button button-primary full-width" type="submit">Add player</button>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="/deploy-config.js"></script>
+    <script src="/socket-loader.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

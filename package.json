@@ -1,0 +1,31 @@
+{
+  "name": "live-cricket-auction",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Real-time cricket player auction platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seed.js",
+    "build:netlify": "node scripts/build-netlify.js",
+    "check": "node --check server.js && node --check config/database.js && node --check middleware/auth.js && node --check models/AuctionSession.js && node --check models/Bid.js && node --check models/Player.js && node --check models/Team.js && node --check models/User.js && node --check routes/api.js && node --check scripts/build-netlify.js && node --check scripts/seed.js && node --check services/auctionService.js && node --check sockets/auctionSocket.js && node --check public/app.js && node --check public/deploy-config.js && node --check public/socket-loader.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
